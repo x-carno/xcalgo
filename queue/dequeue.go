@@ -37,7 +37,7 @@ func (dq *DeQueue) Size() int {
 
 // instead of dq.elements = append([]interface{}{item}, dq.elements...)
 // is more efficient for this method will not allocate new memory
-// but as size of the queue becomes larger and larger, addfirst becomes slower, so it is inappropriate to do benchmark test
+// but as size of the queue becomes larger and larger, addfirst becomes slower
 func (dq *DeQueue) AddFirst(item interface{}) error {
 	if item == nil {
 		return ErrNilItem

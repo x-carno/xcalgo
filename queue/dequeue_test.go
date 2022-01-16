@@ -39,6 +39,13 @@ func TestDeQueue(t *testing.T) {
 	assert.Equal(t, true, tdq.IsEmpty())
 }
 
+func BenchmarkAddFirst(b *testing.B) {
+	tdq := New()
+	for i := 0; i < b.N; i++ {
+		tdq.AddFirst(1)
+	}
+}
+
 func BenchmarkAddLast(b *testing.B) {
 	tdq := New()
 	for i := 0; i < b.N; i++ {
