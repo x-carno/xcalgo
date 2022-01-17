@@ -20,7 +20,7 @@ type DeQueue struct {
 }
 
 // return an empty double end queue
-func New() *DeQueue {
+func NewDeQueue() *DeQueue {
 	return &DeQueue{
 		elements: make([]interface{}, 0),
 	}

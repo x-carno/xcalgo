@@ -7,7 +7,7 @@ import (
 )
 
 func TestDeQueue(t *testing.T) {
-	tdq := New()
+	tdq := NewDeQueue()
 
 	err := tdq.AddFirst(nil)
 	assert.EqualError(t, err, ErrNilItem.Error())
@@ -40,14 +40,14 @@ func TestDeQueue(t *testing.T) {
 }
 
 func BenchmarkAddFirst(b *testing.B) {
-	tdq := New()
+	tdq := NewDeQueue()
 	for i := 0; i < b.N; i++ {
 		tdq.AddFirst(1)
 	}
 }
 
 func BenchmarkAddLast(b *testing.B) {
-	tdq := New()
+	tdq := NewDeQueue()
 	for i := 0; i < b.N; i++ {
 		tdq.AddLast(1)
 	}
