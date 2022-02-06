@@ -8,5 +8,5 @@ import (
 func TimeFunc(f func()) {
 	st := time.Now()
 	f()
-	fmt.Println("func exec time: ", time.Since(st))
+	fmt.Println("\nfunc exec time: ", time.Since(st))
 }
