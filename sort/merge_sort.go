@@ -11,8 +11,8 @@ import (
 type MergeSort struct {
 	items []int
 	size  int
-	// left  int
-	// right int
+
+	sizeToUseConcurrent int
 
 	concurrentNum int
 
@@ -30,12 +30,11 @@ func NewMergeSort(s []int) *MergeSort {
 
 	p, _ := ants.NewPool(1 << len(s))
 	return &MergeSort{
-		items: s,
-		size:  len(s),
-		// left:          0,
-		// right:         len(s),
-		concurrentNum: cn,
-		grPool:        p,
+		items:               s,
+		size:                len(s),
+		sizeToUseConcurrent: 1 << 10,
+		concurrentNum:       cn,
+		grPool:              p,
 	}
 }
 
@@ -53,8 +52,12 @@ func (m *MergeSort) SetConcurrentDepth(n int) {
 	m.concurrentNum = n
 }
 
+func (m *MergeSort) SetSizeToUseConcurrent(s int) {
+	m.sizeToUseConcurrent = s
+}
+
 func (m *MergeSort) Sort() []int {
-	if m.size >= 1<<10 {
+	if m.size >= m.sizeToUseConcurrent {
 		piece := m.size / m.concurrentNum
 		for i := 0; i < m.concurrentNum; i++ {
 			m.wg.Add(1)
