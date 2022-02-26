@@ -1,6 +1,7 @@
 package arrays
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -127,6 +128,65 @@ func TestMissingNumber(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := MissingNumber(tt.args.nums); got != tt.want {
 				t.Errorf("MissingNumber() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestFindNumberIn2DArray(t *testing.T) {
+	type args struct {
+		matrix [][]int
+		target int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		// TODO: Add test cases.
+		// {
+		// 	name: "in",
+		// 	args: args{
+		// 		matrix: [][]int{
+		// 			{1, 2, 3, 4, 5},
+		// 			{2, 3, 4, 5, 6},
+		// 			{3, 4, 5, 6, 7},
+		// 			{4, 5, 6, 7, 8},
+		// 			{5, 6, 7, 8, 9},
+		// 		},
+		// 		target: 5,
+		// 	},
+		// 	want: true,
+		// },
+		// {
+		// 	name: "one ele",
+		// 	args: args{
+		// 		matrix: [][]int{{5}},
+		// 		target: 5,
+		// 	},
+		// 	want: true,
+		// },
+		{
+			name: "one ele",
+			args: args{
+				matrix: [][]int{{5}},
+				target: 3,
+			},
+			want: false,
+		},
+		// {
+		// 	name: "none ele",
+		// 	args: args{
+		// 		matrix: [][]int{{}},
+		// 		target: 0,
+		// 	},
+		// 	want: false,
+		// },
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FindNumberIn2DArray(tt.args.matrix, tt.args.target); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("FindNumberIn2DArray() = %v, want %v", got, tt.want)
 			}
 		})
 	}

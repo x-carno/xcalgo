@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-const BigCount = 1_0000_0000
+const BigCount = 10
 
 var testArr []int
 var testMissingArr []int

@@ -54,3 +54,18 @@ func MissingNumber(nums []int) int {
 	}
 	return l
 }
+
+func FindNumberIn2DArray(matrix [][]int, target int) bool {
+	idxRow, idxCol := len(matrix)-1, 0
+	for idxRow >= 0 && idxCol < len(matrix[0]) {
+		if target == matrix[idxRow][idxCol] {
+			return true
+		}
+		if target < matrix[idxRow][idxCol] {
+			idxRow--
+		} else {
+			idxCol++
+		}
+	}
+	return false
+}
