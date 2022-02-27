@@ -23,3 +23,24 @@ func FirstUniqChar(s string) byte {
 	}
 	return ' '
 }
+
+func StrStr(haystack string, needle string) int {
+	// strings.Index(haystack, needle)
+	if len(needle) == 0 {
+		return 0
+	}
+	for i := 0; i < len(haystack)-len(needle)+1; i++ {
+		flag := true
+		for j := 0; j < len(needle); j++ {
+			if haystack[i+j] != needle[j] {
+				flag = false
+				break
+			}
+		}
+
+		if flag {
+			return i
+		}
+	}
+	return -1
+}
