@@ -1,5 +1,7 @@
 package trees
 
+import "math"
+
 type BinaryTree struct {
 	root *TreeNode
 }
@@ -72,6 +74,44 @@ func (root *TreeNode) LevelOrder2D() [][]int {
 	}
 
 	return ret
+}
+
+func (root *TreeNode) Height() int {
+	height := 0
+	if root == nil {
+		return height
+	}
+	queue := make([][]*TreeNode, 0)
+	queue = append(queue, []*TreeNode{root})
+	for len(queue) != 0 {
+		layer := queue[0]
+		nextLayer := make([]*TreeNode, 0)
+		for _, node := range layer {
+			if node.Left != nil {
+				nextLayer = append(nextLayer, node.Left)
+			}
+			if node.Right != nil {
+				nextLayer = append(nextLayer, node.Right)
+			}
+		}
+		if len(nextLayer) != 0 {
+			queue = append(queue, nextLayer)
+		}
+		queue = queue[1:]
+		height++
+	}
+	return height
+}
+
+func (root *TreeNode) IsBalanced() bool {
+	if root == nil {
+		return true
+	}
+
+	hleft := root.Left.Height()
+	hright := root.Right.Height()
+
+	return math.Abs(float64(hleft-hright)) <= 1 && root.Left.IsBalanced() && root.Right.IsBalanced()
 }
 
 // given binary tree
