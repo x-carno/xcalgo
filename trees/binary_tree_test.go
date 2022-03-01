@@ -396,3 +396,81 @@ func TestTreeNode_isPrefixSequence(t *testing.T) {
 		})
 	}
 }
+
+func TestTreeNode_Height(t *testing.T) {
+	type fields struct {
+		Val   int
+		Left  *TreeNode
+		Right *TreeNode
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   int
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			fields: fields{
+				Val:  3,
+				Left: &TreeNode{Val: 9},
+				Right: &TreeNode{
+					Val: 20,
+				},
+			},
+			want: 2,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			root := &TreeNode{
+				Val:   tt.fields.Val,
+				Left:  tt.fields.Left,
+				Right: tt.fields.Right,
+			}
+			if got := root.Height(); got != tt.want {
+				t.Errorf("TreeNode.Height() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestTreeNode_IsBalanced(t *testing.T) {
+	type fields struct {
+		Val   int
+		Left  *TreeNode
+		Right *TreeNode
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   bool
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			fields: fields{
+				Val:  3,
+				Left: &TreeNode{Val: 9},
+				Right: &TreeNode{
+					Val:   20,
+					Left:  &TreeNode{Val: 15},
+					Right: &TreeNode{Val: 7},
+				},
+			},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			root := &TreeNode{
+				Val:   tt.fields.Val,
+				Left:  tt.fields.Left,
+				Right: tt.fields.Right,
+			}
+			if got := root.IsBalanced(); got != tt.want {
+				t.Errorf("TreeNode.IsBalanced() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
