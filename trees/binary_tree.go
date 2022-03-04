@@ -1,6 +1,10 @@
 package trees
 
-import "math"
+import (
+	"math"
+
+	"github.com/x-carno/xcalgo/listnode"
+)
 
 type BinaryTree struct {
 	root *TreeNode
@@ -198,6 +202,7 @@ func (root *TreeNode) MirrorTree() *TreeNode {
 	return root
 }
 
+// 对称二叉树
 func (root *TreeNode) IsSymmetric() bool {
 	if root == nil {
 		return true
@@ -247,4 +252,24 @@ func (A *TreeNode) hasPrefixSequence(B *TreeNode) bool {
 		return false
 	}
 	return A.Left.hasPrefixSequence(B.Left) && A.Right.hasPrefixSequence(B.Right)
+}
+
+func (root *TreeNode) IsSubPath(head *listnode.ListNode) bool {
+	if root == nil || head == nil {
+		return false
+	}
+	return root.hasPrefixPath(head) || root.Left.IsSubPath(head) || root.Right.IsSubPath(head)
+}
+
+func (root *TreeNode) hasPrefixPath(head *listnode.ListNode) bool {
+	if head == nil {
+		return true
+	}
+	if root == nil {
+		return false
+	}
+	if root.Val != head.Val {
+		return false
+	}
+	return root.Left.hasPrefixPath(head.Next) || root.Right.hasPrefixPath(head.Next)
 }
