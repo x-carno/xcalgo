@@ -1,6 +1,9 @@
 package arrays
 
-import "sort"
+import (
+	"fmt"
+	"sort"
+)
 
 // just return any repeat number
 func FindRepeatNumber(nums []int) int {
@@ -95,4 +98,27 @@ func AddToArrayForm(num []int, k int) []int {
 		j--
 	}
 	return ret
+}
+
+// input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+// output: 6
+// max sum of continuous subarray [4,-1,2,1] is 6
+func MaxSubArray(nums []int) int {
+	max := nums[0]
+	idx := 0
+	idxL, idxR := 0, 0
+	for i := 1; i < len(nums); i++ {
+		if nums[i-1] > 0 {
+			nums[i] += nums[i-1]
+		} else {
+			idx = i
+		}
+		if nums[i] > max {
+			idxL = idx
+			idxR = i
+			max = nums[i]
+		}
+	}
+	fmt.Println(idxL, "~", idxR)
+	return max
 }

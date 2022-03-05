@@ -177,3 +177,29 @@ func Rotate(matrix [][]int) {
 		}
 	}
 }
+
+func FindRotation(mat [][]int, target [][]int) bool {
+	compare := func(matInner [][]int, targetInner [][]int) bool {
+		for i := 0; i < len(targetInner); i++ {
+			for j := 0; j < len(matInner); j++ {
+				if matInner[i][j] != targetInner[i][j] {
+					return false
+				}
+			}
+		}
+		return true
+	}
+	n := len(mat)
+	for r := 0; r < 4; r++ {
+		if compare(mat, target) {
+			return true
+		}
+		for i := 0; i < n/2; i++ {
+			for j := 0; j < (n+1)/2; j++ {
+				mat[i][j], mat[n-j-1][i], mat[n-i-1][n-j-1], mat[j][n-i-1] =
+					mat[n-j-1][i], mat[n-i-1][n-j-1], mat[j][n-i-1], mat[i][j]
+			}
+		}
+	}
+	return false
+}
