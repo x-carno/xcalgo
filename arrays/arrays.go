@@ -69,3 +69,30 @@ func FindNumberIn2DArray(matrix [][]int, target int) bool {
 	}
 	return false
 }
+
+func AddToArrayForm(num []int, k int) []int {
+	ret := make([]int, len(num)+1)
+	ret[0] = k
+	for i := len(num) - 1; i >= 0; i-- {
+		c := num[i] + ret[len(num)-1-i]
+		ret[len(num)-1-i] = c % 10
+		ret[len(num)-i] = c / 10
+	}
+
+	lastRet := ret[len(ret)-1]
+	if lastRet == 0 {
+		ret = ret[:len(ret)-1]
+	}
+	for lastRet >= 10 {
+		ret[len(ret)-1] = lastRet % 10
+		ret = append(ret, lastRet/10)
+		lastRet = lastRet / 10
+	}
+	i, j := 0, len(ret)-1
+	for i < j {
+		ret[i], ret[j] = ret[j], ret[i]
+		i++
+		j--
+	}
+	return ret
+}

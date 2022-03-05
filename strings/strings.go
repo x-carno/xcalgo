@@ -90,3 +90,73 @@ func Multiply(num1 string, num2 string) string {
 	}
 	return retS.String()
 }
+
+// e.g. a="111", b="100"
+// return "1011"
+func AddBinary(a string, b string) string {
+	if a == "0" {
+		return b
+	}
+	if b == "0" {
+		return a
+	}
+	if len(a) < len(b) {
+		a, b = b, a
+	}
+	la, lb := len(a), len(b)
+	ret := make([]int, la+1)
+	retIdx := 0
+	for {
+		c := 0
+		if la > 0 {
+			c += int(a[la-1] - '0')
+		}
+		if lb > 0 {
+			c += int(b[lb-1] - '0')
+		}
+		c += ret[retIdx]
+		switch c {
+		case 3:
+			ret[retIdx], ret[retIdx+1] = 1, 1
+		case 2:
+			ret[retIdx], ret[retIdx+1] = 0, 1
+		default:
+			ret[retIdx] = c
+		}
+		retIdx++
+		la--
+		lb--
+		if retIdx == len(ret) {
+			break
+		}
+	}
+	if ret[len(ret)-1] == 0 {
+		ret = ret[:len(ret)-1]
+	}
+	retS := strings.Builder{}
+	for i := len(ret) - 1; i >= 0; i-- {
+		retS.WriteByte(byte(ret[i] + '0'))
+	}
+	return retS.String()
+}
+
+// e.g. s = "   fly me   to   the moon  "
+// return 4 (the last word is moon)
+func LengthOfLastWord(s string) int {
+	lastSpace := 0
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] != ' ' {
+			break
+		}
+		lastSpace++
+	}
+	lastWord := 0
+	s = s[:len(s)-lastSpace]
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] == ' ' {
+			break
+		}
+		lastWord++
+	}
+	return lastWord
+}

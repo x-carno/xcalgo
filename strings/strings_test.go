@@ -141,3 +141,57 @@ func TestMultiply(t *testing.T) {
 		})
 	}
 }
+
+func TestAddBinary(t *testing.T) {
+	type args struct {
+		a string
+		b string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		// TODO: Add test cases.
+		{
+			name: "1",
+			args: args{
+				a: "10",
+				b: "100",
+			},
+			want: "110",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := AddBinary(tt.args.a, tt.args.b); got != tt.want {
+				t.Errorf("AddBinary() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestLengthOfLastWord(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		// TODO: Add test cases.
+		{
+			name: "t1",
+			args: args{s: "Hello World"},
+			want: 5,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := LengthOfLastWord(tt.args.s); got != tt.want {
+				t.Errorf("LengthOfLastWord() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
