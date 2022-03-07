@@ -6,6 +6,9 @@ import (
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/x-carno/xcalgo/dynamic"
+	"github.com/x-carno/xcalgo/util"
 )
 
 var (
@@ -18,6 +21,11 @@ var (
 )
 
 func main() {
+	fmt.Println(1 << 62)
+	util.TimeFunc(func() {
+		fmt.Println(dynamic.TranslateNum(1111111111111111111))
+	})
+
 	matrix := [][]int{
 		{1, 2, 3, 4, 5},
 		{2, 3, 4, 5, 6},
