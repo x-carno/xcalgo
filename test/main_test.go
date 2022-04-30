@@ -108,3 +108,38 @@ func TestDailyTemperatures(t *testing.T) {
 		})
 	}
 }
+
+func TestHasAlternatingBits(t *testing.T) {
+	type args struct {
+		n int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		// TODO: Add test cases.
+		// {
+		// 	name: "t1",
+		// 	args: args{n: 1366},
+		// 	want: false,
+		// },
+		// {
+		// 	name: "t1",
+		// 	args: args{n: 1},
+		// 	want: true,
+		// },
+		{
+			name: "t1",
+			args: args{n: 1365},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := HasAlternatingBits(tt.args.n); got != tt.want {
+				t.Errorf("HasAlternatingBits() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

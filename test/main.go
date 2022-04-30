@@ -21,6 +21,7 @@ var (
 )
 
 func main() {
+
 	fmt.Println(1 << 62)
 	util.TimeFunc(func() {
 		fmt.Println(dynamic.TranslateNum(1111111111111111111))
@@ -100,6 +101,7 @@ func AA(p1, p2 []string) {
 	}
 }
 
+// 逆波兰表达式求值
 func EvalRPN(tokens []string) int {
 	ret := make([]int, 0)
 	for _, v := range tokens {
@@ -154,6 +156,10 @@ func Fib(n int) int {
 	return cm[1]
 }
 
+// 给定一个整数数组 temperatures ，表示每天的温度，返回一个数组 answer ，
+// 其中 answer[i] 是指在第 i 天之后，才会有更高的温度。如果气温在这之后都不会升高，请在该位置用 0 来代替。
+// 输入: temperatures = [73,74,75,71,69,72,76,73]
+// 输出: [1,1,4,2,1,1,0,0]
 func DailyTemperatures(temperatures []int) []int {
 	ret := make([]int, len(temperatures))
 	for i := len(temperatures) - 2; i >= 0; i-- {
@@ -210,4 +216,17 @@ func FindRotation(mat [][]int, target [][]int) bool {
 		}
 	}
 	return false
+}
+
+func HasAlternatingBits(n int) bool {
+	last := n % 2
+	for n > 0 {
+		n = n >> 1
+		pre := n % 2
+		if pre == last {
+			return false
+		}
+		last = pre
+	}
+	return true
 }
